@@ -6,7 +6,6 @@ import com.example.products.http.model.CreateProductTO;
 import com.example.products.http.model.ProductCreatedResponseTO;
 import com.example.products.http.model.ProductTO;
 import com.example.products.http.model.SearchQueryTO;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,7 @@ public class ProductsController {
     private final HttpModelMapper mapper;
 
     @PostMapping("/api/v1/products/create")
-    public ResponseEntity<ProductCreatedResponseTO> createProduct(@RequestBody @Valid CreateProductTO createProductTO) {
+    public ResponseEntity<ProductCreatedResponseTO> createProduct(@RequestBody CreateProductTO createProductTO) {
         final Product product = productService.createProduct(mapper.map(createProductTO));
         return ResponseEntity.ok(ProductCreatedResponseTO.success(product.applicationNumber()));
     }
